@@ -56,11 +56,9 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Car $car)
     {
         //
-        $car = Car::with('types')->find($id);
-        return view('car.show', compact('car'));
     }
 
     /**
