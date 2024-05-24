@@ -49,7 +49,7 @@
         <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center text-center">
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png" alt="Icon" style="width: 50px; height: 50px;">
                         {{-- <h1>DeMobil</h1> --}}
@@ -73,7 +73,53 @@
                         <a href="{{ url('tentang-kami') }}" class="nav-item nav-link">Tentang Kami</a>
                         <a href="{{ url('kontak') }}" class="nav-item nav-link">Kontak</a>
                     </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Login</a>
+                    @auth
+                  @if(auth()->user()->is_admin)
+                      <!-- Jika pengguna adalah admin, tampilkan dropdown dengan nama pengguna dan opsi logout
+                      <li class="nav-item dropdown">
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              {{ Auth::user()->name }}
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                  Logout
+                              </a>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  @csrf
+                              </form>
+                          </div>
+                      </li>
+                      -->
+
+                      <li class="nav-item  px-3 d-none d-lg-flex">
+                          <a class="nav-link" href="{{ route('home') }}" role="button" aria-haspopup="true" aria-expanded="false">
+                              Dashboard
+                          </a>
+                      </li>
+                  @else
+                      <!-- Jika pengguna bukan admin, tampilkan dropdown dengan tautan ke halaman profil dan opsi logout -->
+                      <li class="nav-item dropdown  px-3 d-none d-lg-flex" >
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{ Auth::user()->name }}
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{ route('profile.index') }}">
+                                  Profile
+                              </a>
+                              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                  Logout
+                              </a>
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  @csrf
+                              </form>
+                          </div>
+                      </li>
+                  @endif
+              @else
+                  <!-- Jika pengguna belum login, tampilkan tautan login -->
+                  <a href="{{ route('login') }}" class="btn btn-primary px-3 d-none d-lg-flex">Login</a>
+              @endauth
+
                 </div>
             </nav>
         </div>
