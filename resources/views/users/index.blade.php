@@ -24,22 +24,23 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-body p-0">
-
-                            <table class="table">
-                                <thead>
+                        <div class="card-body">
+                            <table id="data-table" class="table table-bordered table-striped table-hover text-nowrap table-responsive text-center align-middle">
+                                <thead class="bg-primary text-white">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($users as $user)
-                                    <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                    </tr>
-                                @endforeach
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <th scope="row">{{ $user->id }}</th>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
