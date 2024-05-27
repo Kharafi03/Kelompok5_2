@@ -25,24 +25,26 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <table id="data-table" class="table table-bordered table-striped table-hover text-nowrap table-responsive text-center align-middle">
-                                <thead class="bg-primary text-white">
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($users as $user)
+                            <div class="table-responsive">
+                                <table id="data-table" class="table table-bordered table-striped table-hover text-nowrap table-responsive text-center align-middle w-100">
+                                    <thead class="bg-primary text-white">
                                         <tr>
-                                            <th scope="row">{{ $user->id }}</th>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <th scope="row">{{ $user->id }}</th>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- /.card-body -->
 
@@ -58,3 +60,4 @@
     </div>
     <!-- /.content -->
 @endsection
+@include('layouts.datatable')

@@ -112,31 +112,33 @@
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../pages/profile.html">
+                <a class="nav-link" href="">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-lg opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Profile</span>
+                    <span class="nav-link-text ms-1">{{ Auth::user()->name }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../pages/sign-in.html">
+                <a class="nav-link" href="{{ route('admin.settings.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-copy-04 text-warning text-lg opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
+                    <span class="nav-link-text ms-1">{{ __('Settings') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../pages/sign-up.html">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-info text-lg opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
+                    <span class="nav-link-text ms-1">{{ __('Logout') }}</span>
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </li>
         </ul>
         {{-- <div class="card card-plain shadow-none" id="sidenavCard">

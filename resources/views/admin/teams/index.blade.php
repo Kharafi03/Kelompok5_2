@@ -16,7 +16,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="data-table" class="table table-bordered table-striped table-hover text-nowrap table-responsive text-center align-middle">
+                                <table id="data-table" class="table table-bordered table-striped table-hover text-nowrap table-responsive text-center align-middle w-100">
                                     <thead class="bg-primary text-white">
                                         <tr>
                                             <th>No</th>
@@ -59,7 +59,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="8" class="text-center">Data Kosong !</td>
+                                                <td class="text-center">Data Kosong !</td>
                                             </tr>
                                         @endforelse
                                 </table>
@@ -78,16 +78,4 @@
     <!-- /.content -->
 @endsection
 
-@push('style-alt')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
-@endpush
-
-@push('script-alt')
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
-    <script>
-        $("#data-table").DataTable();
-    </script>
-@endpush
+@include('layouts.datatable')

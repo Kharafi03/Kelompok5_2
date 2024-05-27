@@ -14,8 +14,8 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="data-table" class="table table-bordered table-striped">
-                                    <thead>
+                                <table id="data-table" class="table table-bordered table-striped table-hover text-nowrap table-responsive text-center align-middle w-100">
+                                    <thead class="bg-primary text-white">
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Lengkap</th>
@@ -37,22 +37,22 @@
                                                 <td>{{ $booking->car->nama_mobil }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center gap-2">
-                                                        <form onclick="return confirm('are you sure !')"
+                                                        <form onclick="return confirm('Are you sure?')"
                                                             action="{{ route('admin.bookings.destroy', $booking) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-danger" booking="submit"><i
-                                                                    class="fa fa-trash"></i></button>
+                                                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                                                         </form>
                                                     </div>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="8" class="text-center">Data Kosong !</td>
+                                                <td class="text-center">Data Kosong!</td>
                                             </tr>
                                         @endforelse
+                                    </tbody>                                    
                                 </table>
                             </div>
                         </div>
@@ -69,16 +69,4 @@
     <!-- /.content -->
 @endsection
 
-@push('style-alt')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
-@endpush
-
-@push('script-alt')
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
-    <script>
-        $("#data-table").DataTable();
-    </script>
-@endpush
+@include('layouts.datatable')
