@@ -3,6 +3,210 @@
 @section('content')
     <div class="container-fluid py-4">
         <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                        Menunggu Pembayaran
+                                    </p>
+                                    <h5 class="font-weight-bolder">150</h5>
+                                    <p class="mb-0">
+                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                        since yesterday
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-secondary shadow-primary text-center rounded-circle">
+                                    <i class="fa-solid fa-hourglass-start text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                        Menunggu Konfirmasi
+                                    </p>
+                                    <h5 class="font-weight-bolder">50</h5>
+                                    <p class="mb-0">
+                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
+                                        since last week
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                 <div class="icon icon-shape bg-gradient-warning shadow-primary text-center rounded-circle">
+                                    <i class="fa-solid fa-clock-rotate-left text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                        Belum dikembalikan
+                                    </p>
+                                    <h5 class="font-weight-bolder">35</h5>
+                                    <p class="mb-0">
+                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                                        since last quarter
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                    <i class="fa-solid fa-window-restore text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                        Jenis Kendaraan
+                                    </p>
+                                    <h5 class="font-weight-bolder">60</h5>
+                                    <p class="mb-0">
+                                        <span class="text-success text-sm font-weight-bolder">+5%</span>
+                                        than last month
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                               <div class="icon icon-shape bg-gradient-dark shadow-primary text-center rounded-circle">
+                                   <i class="fa-solid fa-gauge  text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                        Jumlah Kendaraan
+                                    </p>
+                                    <h5 class="font-weight-bolder">150</h5>
+                                    <p class="mb-0">
+                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                        since yesterday
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-info shadow-primary text-center rounded-circle">
+                                    <i class="fa-solid fa-caravan text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                        Total Sewa
+                                    </p>
+                                    <h5 class="font-weight-bolder">200</h5>
+                                    <p class="mb-0">
+                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
+                                        since last week
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                 <div class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle">
+                                   <i class="fa-solid fa-rectangle-list text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                        User
+                                    </p>
+                                    <h5 class="font-weight-bolder">300</h5>
+                                    <p class="mb-0">
+                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                                        since last quarter
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-primary text-center rounded-circle">
+                                    <i class="fa-solid fa-user text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                                        Hubungi Kami
+                                    </p>
+                                    <h5 class="font-weight-bolder">530</h5>
+                                    <p class="mb-0">
+                                        <span class="text-success text-sm font-weight-bolder">+5%</span>
+                                        than last month
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                    <i class="fa-solid fa-phone-volume  text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
             <div class="col-lg-7 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-3 bg-transparent">
@@ -26,13 +230,12 @@
                             <div class="carousel-item h-100 active"
                                 style="background-image: url('https://images.unsplash.com/photo-1605756580041-21312e9fb2bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
                                 <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md">
-                                        <i class="fa-solid fa-camera text-dark opacity-10"></i>
+                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                                        <i class="ni ni-camera-compact text-dark opacity-10"></i>
                                     </div>
-                                    <h5 class="text-white mb-1">Get started with Argon</h5>
+                                    <h5 class="text-white mb-1">OtoRent | Ankavi Team</h5>
                                     <p>
-                                        There’s nothing I really wanted to do in life that I
-                                        wasn’t able to get good at.
+                                        Tempat Persewaan Mobil dan Motor Nyaman, Aman dan Percaya !
                                     </p>
                                 </div>
                             </div>
@@ -43,26 +246,24 @@
                                         <i class="ni ni-bulb-61 text-dark opacity-10"></i>
                                     </div>
                                     <h5 class="text-white mb-1">
-                                        Faster way to create web pages
+                                        Persewaan Mobil dan Motor
                                     </h5>
                                     <p>
-                                        That’s my skill. I’m not really specifically talented at
-                                        anything except for the ability to learn.
+                                        Nikmati perjalanan anda dengan armada terbaik dari kami !
                                     </p>
                                 </div>
                             </div>
                             <div class="carousel-item h-100"
-                                style="background-image: url('https://images.unsplash.com/photo-1641921966529-7a887417a8b2?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover;">
+                                style="background-image: url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW90b3JjeWNsZXxlbnwwfHwwfHx8MA%3D%3D'); background-size: cover;">
                                 <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                                         <i class="ni ni-trophy text-dark opacity-10"></i>
                                     </div>
                                     <h5 class="text-white mb-1">
-                                        Share with us your design tips!
+                                        Persewaan Mobil dan Motor
                                     </h5>
                                     <p>
-                                        Don’t be afraid to be wrong because you can’t learn
-                                        anything from a compliment.
+                                        Tunggu apalagi? Sewa Sekarang juga !
                                     </p>
                                 </div>
                             </div>
@@ -82,215 +283,11 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                        Menunggu Pembayaran
-                                    </p>
-                                    <h2 class="font-weight-bolder">5</h2>
-                                    {{-- <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                        since yesterday
-                                    </p> --}}
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                    <i class="fa-solid fa-hourglass-start text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                        Menunggu Konfirmasi
-                                    </p>
-                                    <h2 class="font-weight-bolder">5</h2>
-                                    {{-- <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                        since last week
-                                    </p> --}}
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                    <i class="fa-solid fa-clipboard-check text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                        Belum Dikembalikan
-                                    </p>
-                                    <h2 class="font-weight-bolder">2</h2>
-                                    {{-- <p class="mb-0">
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                        since last quarter
-                                    </p> --}}
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                    <i class="fa-solid fa-rotate-left text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                        Total Penyewaan
-                                    </p>
-                                    <h2 class="font-weight-bolder">4</h2>
-                                    {{-- <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+5%</span>
-                                        than last month
-                                    </p> --}}
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <i class="fa-solid fa-rectangle-list text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                        Total Mobil
-                                    </p>
-                                    <h2 class="font-weight-bolder">5</h2>
-                                    {{-- <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                        since yesterday
-                                    </p> --}}
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-secondary shadow-secondary text-center rounded-circle">
-                                    <i class="fa-solid fa-car text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                        Total Motor
-                                    </p>
-                                    <h2 class="font-weight-bolder">5</h2>
-                                    {{-- <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                        since last week
-                                    </p> --}}
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
-                                    <i class="fa-solid fa-motorcycle text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                        Total User
-                                    </p>
-                                    <h2 class="font-weight-bolder">2</h2>
-                                    {{-- <p class="mb-0">
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                        since last quarter
-                                    </p> --}}
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-dark shadow-dark text-center rounded-circle">
-                                    <i class="fa-solid fa-user text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                        Total Pesan
-                                    </p>
-                                    <h2 class="font-weight-bolder">4</h2>
-                                    {{-- <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+5%</span>
-                                        than last month
-                                    </p> --}}
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                    <i class="fa-solid fa-envelope text-lg opacity-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
             <div class="col-lg-7 mb-lg-0 mb-4">
                 <div class="card">
                     <div class="card-header pb-0 p-3">
                         <div class="d-flex justify-content-between">
-                            <h6 class="mb-2">Sales by Country</h6>
+                            <h6 class="mb-2">Feedback</h6>
                         </div>
                     </div>
                     <div class="table-responsive">
