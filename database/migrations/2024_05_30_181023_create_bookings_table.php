@@ -24,7 +24,7 @@ return new class extends Migration
             $table->decimal('total_fee', 10, 2); // total biaya
             $table->enum('booking_status', ['Menunggu Pembayaran', 'Menunggu Konfirmasi', 'Sudah Dibayar', 'Pembayaran Terkonfirmasi', 'Belum Dikembalikan', 'Selesai', 'Dibatalkan']);
             $table->uuid('booking_code')->unique();
-        
+            $table->string('snap_token')->nullable();
             // Kolom untuk mendukung jenis kendaraan
             $table->string('vehicle_type');
             $table->unsignedBigInteger('vehicle_id');
