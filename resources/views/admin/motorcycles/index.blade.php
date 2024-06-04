@@ -20,11 +20,10 @@
                                     <thead class="bg-primary text-white">
                                         <tr>
                                             <th>No</th>
+                                            <th>Gambar</th>
                                             <th>Nama</th>
-                                            <th>Gambar Motor</th>
                                             <th>Type Motor</th>
-                                            <th>Harga Sewa</th>
-                                            <th>Jumlah Penumpang</th>
+                                            <th>Harga sewa</th>                   
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -33,20 +32,16 @@
                                         @forelse($motorcycles as $motorcycle)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $motorcycle->nama_motor }}</td>
                                                 <td>
-                                                    <a target="_blank" href="{{ Storage::url($motorcycle->image) }}">
-                                                        <img width="80" src="{{ Storage::url($motorcycle->image) }}"
-                                                            alt="">
-                                                    </a>
+                                                    <img src="{{ asset('storage/' . $motorcycle->image1) }}" alt="image" class="img-fluid" width="100">
                                                 </td>
+                                                <td>{{ $motorcycle->nama_motor }}</td>
                                                 <td>
                                                     <span class="badge bg-primary">
                                                         {{ $motorcycle->type->nama }}
                                                     </span>
                                                 </td>
                                                 <td>Rp{{ number_format($motorcycle->price, 0, ',', '.') }}</td>
-                                                <td>{{ $motorcycle->penumpang }}</td>
                                                 <td>{{ $motorcycle->statusLabel() }}</td>
                                                 <td>
                                                     <div class="d-flex justify-content-center gap-2">

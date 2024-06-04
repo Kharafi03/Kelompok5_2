@@ -7,16 +7,16 @@
                 <div id="carouselExample" class="carousel slide carousel-fade wow fadeInUp" data-wow-delay="0.1s">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ Storage::url($cars->image) }}" class="d-block img-fluid w-100" alt="...">
+                            <img src="{{ asset('storage/' . $cars->image1) }}" class="d-block img-fluid w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ Storage::url($cars->image) }}" class="d-block img-fluid w-100" alt="...">
+                            <img src="{{ asset('storage/' . $cars->image2) }}" class="d-block img-fluid w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ Storage::url($cars->image) }}" class="d-block img-fluid w-100" alt="...">
+                            <img src="{{ asset('storage/' . $cars->image3) }}" class="d-block img-fluid w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ Storage::url($cars->image) }}" class="d-block img-fluid w-100" alt="...">
+                            <img src="{{ asset('storage/' . $cars->image4) }}" class="d-block img-fluid w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
@@ -32,19 +32,19 @@
                 </div>
                 <div class="row mt-2 wow slideInLeft" data-wow-delay="0.1s">
                     <div class="col-3 thumbnail">
-                        <img src="{{ Storage::url($cars->image) }}" class="img-fluid" data-bs-target="#carouselExample"
+                        <img src="{{ asset('storage/' . $cars->image1) }}" class="img-fluid" data-bs-target="#carouselExample"
                             data-bs-slide-to="0" alt="...">
                     </div>
                     <div class="col-3 thumbnail">
-                        <img src="{{ Storage::url($cars->image) }}" class="img-fluid" data-bs-target="#carouselExample"
+                        <img src="{{ asset('storage/' . $cars->image2) }}" class="img-fluid" data-bs-target="#carouselExample"
                             data-bs-slide-to="1" alt="...">
                     </div>
                     <div class="col-3 thumbnail">
-                        <img src="{{ Storage::url($cars->image) }}" class="img-fluid" data-bs-target="#carouselExample"
+                        <img src="{{ asset('storage/' . $cars->image3) }}" class="img-fluid" data-bs-target="#carouselExample"
                             data-bs-slide-to="2" alt="...">
                     </div>
                     <div class="col-3 thumbnail">
-                        <img src="{{ Storage::url($cars->image) }}" class="img-fluid" data-bs-target="#carouselExample"
+                        <img src="{{ asset('storage/' . $cars->image4) }}" class="img-fluid" data-bs-target="#carouselExample"
                             data-bs-slide-to="3" alt="...">
                     </div>
                 </div>
@@ -57,13 +57,20 @@
                             <p class="lead mb-0">Rp. {{ number_format($cars->price) }} / hari</p>
                         </div>
                         <div class="col">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-secondary"></i>
-                            <span class="ms-2">4.5</span>
-                        </div>
+                        @php
+                            $averageRating = $feedbacks->avg('rating');
+                            $roundedRating = round($averageRating);
+                        @endphp
+
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $roundedRating)
+                                <i class="fas fa-star text-warning"></i>
+                            @else
+                                <i class="fas fa-star text-secondary"></i>
+                            @endif
+                        @endfor
+                        <span class="ms-2">{{ number_format($averageRating, 1) }}</span>
+                    </div>
                     </div>
                     <div class="row mt-3">
                         <div class="row">
@@ -93,7 +100,8 @@
                     <hr>
                     @auth
                     <div class="d-flex justify-content-between align-items-center mt-3">
-                        <a href="{{ url('/booking') }}" class="btn btn-primary">Cek Ketersedian</a>
+                        {{-- <a href="{{ route('check_availability', ['car_id' => $cars->id]) }}" class="btn btn-primary">Cek Ketersediaan</a> --}}
+                        <a href="{{ route('check_availability', ['vehicle_type' => 'car', 'vehicle_id' => $cars->id]) }}" class="btn btn-primary">Cek Ketersediaan Mobil</a>
                     </div>
                     @else
                     <div class="d-flex justify-content-between align-items-center mt-3">
@@ -107,30 +115,34 @@
                 <div class="mx-auto mb-1 wow fadeInUp" data-wow-delay="0.1s">
                     <h3>Ulasan Pelanggan Kami</h3>
                 </div>
+                
                 <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                @foreach($feedbacks as $feedback)
                     <div class="testimonial-item rounded p-3">
                         <div class="bg-white border rounded p-4">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque id qui eius magnam voluptate nobis distinctio ea nulla cumque amet?</p>
+                            <p>{{ $feedback->feedback }}</p>
                             <div class="col mb-3">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-secondary"></i>
-                                <span class="ms-2">4.5</span>
+                                @for ($i = 0; $i < $feedback->rating; $i++)
+                                    <i class="fas fa-star text-warning"></i>
+                                @endfor
+                                @for ($i = $feedback->rating; $i < 5; $i++)
+                                    <i class="fas fa-star text-secondary"></i>
+                                @endfor
+                                <span class="ms-2">{{ $feedback->rating }}</span>
                             </div>
                             <div class="d-flex align-items-center">
                                 <img class="img-fluid flex-shrink-0 rounded"
-                                    src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png"
+                                    src="{{ asset('storage/avatars/' . $feedback->avatar) }}"
                                     alt="" style="width: 45px; height: 45px;">
                                 <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Lorem, ipsum.</h6>
-                                    <small>Lorem, ipsum.</small>
+                                    <h6 class="fw-bold mb-1">{{ $feedback->user_name }}</h6>
+                                    <small>{{ $feedback->created_at->format('M d, Y') }}</small>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+            </div>
             </div>
         </div>
     </div>

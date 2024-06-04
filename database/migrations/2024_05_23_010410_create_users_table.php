@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('avatar')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('ktp')->nullable();
             $table->string('sim')->nullable();
+            $table->enum('account_status', ['Belum Terverifikasi', 'Menunggu Verifikasi', 'Terverifikasi'])->default('Belum Terverifikasi');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -7,25 +7,42 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\BookingRequest;
+use App\Models\Feedback;
 
 class CarController extends Controller
 {
     public function index(Request $request)
     {
-        $cars = Car::where('status',1);
-        
-        if($request->category_id && $request->penumpang){
-            $cars = $cars->Where('type_id',$request->category_id)->Where('penumpang','>=',$request->penumpang);
+        $cars = Car::all();
+
+        $availability = [];
+
+        foreach ($cars as $car) {
+            if ($request->has('start_date') && $request->has('end_date')) {
+                $startDate = $request->start_date;
+                $endDate = $request->end_date;
+
+                $isAvailable = $car->rentals()->where(function ($query) use ($startDate, $endDate) {
+                    $query->whereBetween('start_date', [$startDate, $endDate])
+                        ->orWhereBetween('end_date', [$startDate, $endDate])
+                        ->orWhereRaw('? BETWEEN start_date AND end_date', [$startDate])
+                        ->orWhereRaw('? BETWEEN start_date AND end_date', [$endDate]);
+                })->doesntExist();
+
+                $availability[$car->id] = $isAvailable;
+            } else {
+                $availability[$car->id] = true; // Default to true if no dates are selected
+            }
         }
-        
-        $cars = $cars->get();
-        return view('frontend.car.index', compact('cars'));
+
+        return view('frontend.car.index', compact('cars', 'availability'));
     }
 
     public function show($id)
     {
         $cars = Car::findorFail($id);
-        return view('frontend.car.show', compact('cars'));
+        $feedbacks = Feedback::where('vehicle_type', 'car')->where('vehicle_id', $id)->get();
+        return view('frontend.car.show', compact('cars', 'feedbacks'));
     }
 
     public function store(BookingRequest $request)
