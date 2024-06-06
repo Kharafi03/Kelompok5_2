@@ -34,49 +34,50 @@
     <!-- Search Start -->
     <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.3s" style="padding: 35px;">
         <div class="container">
-            <div class="row g-2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="row g-2">
-                                <div class="col-md-4">
-                                    <h4 class="text-white mb-3">Rentang Harga</h4>
-                                    <select class="form-select border-0 py-3">
-                                        <option value="" hidden>Pilih Rentang Harga</option>
-                                        <option value="200000-300000">Rp. 200.000 - Rp. 300.000</option>
-                                        <option value="300000-400000">Rp. 300.000 - Rp. 400.000</option>
-                                        <option value="400000-500000">Rp. 400.000 - Rp. 500.000</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <h4 class="text-white mb-3">Kategori</h4>
-                                    <select name="category_id" id="category_id" class="form-select border-0 py-3">
-                                        <option value="" hidden>Pilih Kategori Mobil</option>
-                                        @foreach ($types as $type)
-                                            <option value="{{ $type->id }}">{{ $type->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <h4 class="text-white mb-3">Jumlah Penumpang</h4>
-                                    <select class="form-select border-0 py-3">
-                                        <option value="" hidden>Jumlah Penumpang</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                    </select>
+            <form id="searchForm" method="GET">
+                <div class="row g-2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="row g-2">
+                                    <div class="col-md-3 mr-2">
+                                        <h4 class="text-white mb-3">Kendaraan</h4>
+                                        <select id="kendaraan" name="kendaraan" class="form-select border-0 py-3">
+                                            <option value="" hidden>Pilih Kendaraan</option>
+                                            <option value="Mobil">Mobil</option>
+                                            <option value="Motor">Motor</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mr-2">
+                                        <h4 class="text-white mb-3">Rentang Harga</h4>
+                                        <select id="harga" name="harga" class="form-select border-0 py-3">
+                                            <option value="" hidden>Pilih Rentang Harga</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mr-2">
+                                        <h4 class="text-white mb-3">Kategori</h4>
+                                        <select name="category_id" id="category_id" class="form-select border-0 py-3">
+                                            <option value="" hidden>Pilih Kategori</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mr-2">
+                                        <h4 class="text-white mb-3">Jumlah Penumpang</h4>
+                                        <select name="penumpang" class="form-select border-0 py-3">
+                                            <option value="" hidden>Jumlah Penumpang</option>
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="8">8</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-end">
-                            <button class="btn btn-dark border-0 w-100 py-3">Cari</button>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" id="searchButton" class="btn btn-dark border-0 w-100 py-3" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="carContainer">Cari</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
+            </form>
         </div>
     </div>
     <!-- Kelebihan Jasa di OtoRent -->
@@ -555,4 +556,135 @@
             margin-top: auto;
         }
     </style>
+@endpush
+@push('script-alt')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var kendaraanSelect = document.getElementById('kendaraan');
+        var hargaSelect = document.getElementById('harga');
+        var categorySelect = document.getElementById('category_id');
+        var penumpangSelect = document.querySelector('select[name="penumpang"]');
+
+        var hargaMobil = [
+            { value: '0-100000', text: 'Rp. 0 - Rp. 100.000' },
+            { value: '100000-200000', text: 'Rp. 100.000 - Rp. 200.000' },
+            { value: '200000-300000', text: 'Rp. 200.000 - Rp. 300.000' },
+            { value: '300000-400000', text: 'Rp. 300.000 - Rp. 400.000' },
+            { value: '400000-500000', text: 'Rp. 400.000 - Rp. 500.000' },
+            { value: '500000-1000000', text: 'Rp. 500.000 - Rp. 1.000.000' }
+        ];
+
+        var hargaMotor = [
+            { value: '0-50000', text: 'Rp. 0 - Rp. 50.000' },
+            { value: '50000-100000', text: 'Rp. 50.000 - Rp. 100.000' },
+            { value: '100000-200000', text: 'Rp. 100.000 - Rp. 200.000' },
+            { value: '200000-300000', text: 'Rp. 200.000 - Rp. 300.000' },
+            { value: '300000-400000', text: 'Rp. 300.000 - Rp. 400.000' },
+            { value: '400000-500000', text: 'Rp. 400.000 - Rp. 500.000' }
+        ];
+
+        var categoriesMobil = [
+            { value: '1', text: 'Sedan' },
+            { value: '2', text: 'SUV' },
+            { value: '3', text: 'MPV' },
+            { value: '4', text: 'Hatchback' }
+        ];
+
+        var categoriesMotor = [
+            { value: '5', text: 'Sport' },
+            { value: '6', text: 'Matic' },
+            { value: '7', text: 'Manual' },
+            { value: '8', text: 'Bebek' }
+        ];
+
+        kendaraanSelect.addEventListener('change', function() {
+            var selectedKendaraan = this.value;
+            updateHargaOptions(selectedKendaraan);
+            updateCategoryOptions(selectedKendaraan);
+            updatePenumpangSelect(selectedKendaraan);
+        });
+
+        function updateHargaOptions(kendaraan) {
+            hargaSelect.innerHTML = '<option value="" hidden>Pilih Rentang Harga</option>';
+            var hargaOptions = kendaraan === 'Mobil' ? hargaMobil : hargaMotor;
+
+            hargaOptions.forEach(function(option) {
+                var opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                hargaSelect.appendChild(opt);
+            });
+        }
+
+        function updateCategoryOptions(kendaraan) {
+            categorySelect.innerHTML = '<option value="" hidden>Pilih Kategori</option>';
+            var categoryOptions = kendaraan === 'Mobil' ? categoriesMobil : categoriesMotor;
+
+            categoryOptions.forEach(function(option) {
+                var opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                categorySelect.appendChild(opt);
+            });
+        }
+
+        function updatePenumpangSelect(kendaraan) {
+            if (kendaraan === 'Motor') {
+                penumpangSelect.setAttribute('disabled', 'disabled');
+                penumpangSelect.selectedIndex = 0; // Reset value to default
+            } else {
+                penumpangSelect.removeAttribute('disabled');
+            }
+        }
+
+        // Inisialisasi opsi rentang harga dan kategori berdasarkan pilihan kendaraan awal (jika ada)
+        updateHargaOptions(kendaraanSelect.value);
+        updateCategoryOptions(kendaraanSelect.value);
+        updatePenumpangSelect(kendaraanSelect.value);
+    });
+
+    document.getElementById('searchButton').addEventListener('click', function() {
+        var kendaraan = document.getElementById('kendaraan').value;
+        var harga = document.getElementById('harga').value;
+        var category = document.getElementById('category_id').value;
+        var penumpang = document.querySelector('select[name="penumpang"]').value;
+        var carContainer = document.getElementById('carContainer');
+        var carItems = document.querySelectorAll('.card-car-item');
+
+        carItems.forEach(function(item) {
+            var itemCategory = item.getAttribute('data-category');
+            var itemPassenger = item.getAttribute('data-passenger');
+            var itemPrice = parseInt(item.getAttribute('data-price'), 10);
+
+            var hargaRange = harga.split('-').map(function(val) { return parseInt(val, 10); });
+            var hargaMin = hargaRange[0];
+            var hargaMax = hargaRange[1];
+
+            var isVisible = true;
+
+            if (kendaraan && itemCategory !== kendaraan) {
+                isVisible = false;
+            }
+            if (harga && (itemPrice < hargaMin || itemPrice > hargaMax)) {
+                isVisible = false;
+            }
+            if (category && itemCategory !== category) {
+                isVisible = false;
+            }
+            if (penumpang && itemPassenger != penumpang) {
+                isVisible = false;
+            }
+
+            if (isVisible) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        carContainer.classList.add('show');
+    });
+
+</script>
+
 @endpush

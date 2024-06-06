@@ -57,7 +57,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/booking-confirmation/{booking_code}/{vehicle_type}/{vehicle_id}', [BookingController::class, 'showBookingConfirmation'])->name('booking_confirmation');
     Route::get('/booking-confirmation/success/{booking_code}', [BookingController::class, 'showBookingSuccess'])->name('booking_success');
     Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
-
 });
 
 Route::get('password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -71,6 +70,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 
 Route::group(['middleware' => ['is_admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     // Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::resource('admin', \App\Http\Controllers\Admin\AdminController::class);
+    Route::post('/password-update', [\App\Http\Controllers\Admin\AdminController::class, 'updatePassword'])->name('password.update.custom');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('cars', \App\Http\Controllers\Admin\CarController::class);
     Route::resource('motorcycles', \App\Http\Controllers\Admin\MotorcycleController::class);
@@ -84,9 +85,11 @@ Route::group(['middleware' => ['is_admin'], 'prefix' => 'admin', 'as' => 'admin.
     Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class);
     Route::resource('feedbacks', \App\Http\Controllers\Admin\FeedbackController::class);
     Route::resource('teams', \App\Http\Controllers\Admin\TeamController::class);
-    Route::resource('settings', \App\Http\Controllers\Admin\SettingController::class)->only(['index', 'store', 'update']);
+    Route::resource('settings', \App\Http\Controllers\Admin\SettingController::class);
     Route::resource('contacts', \App\Http\Controllers\Admin\ContactController::class)->only(['index', 'destroy']);
     Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class);
     Route::resource('blogs', \App\Http\Controllers\Admin\BlogController::class);
     Route::resource('drivers', \App\Http\Controllers\Admin\DriverController::class);
+    Route::get('/bookings/cetak/pdf', [AdminBookingController::class, 'generatePdf'])->name('bookings.pdf');
 });
+// Route::get('/bookings/pdf', [AdminBookingController::class, 'generatePdf'])->name('admin.bookings.pdf');

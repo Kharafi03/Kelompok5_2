@@ -176,7 +176,7 @@ class BookingController extends Controller
 
         );
 
-        
+
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
         $booking->snap_token = $snapToken;
