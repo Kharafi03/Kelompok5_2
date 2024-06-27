@@ -32,8 +32,6 @@
                                             <th scope="col">Foto</th>
                                             <th scope="col">Nama</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Status Akun</th>
-                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,28 +40,11 @@
                                                 <th scope="row">{{ $admin->id }}</th>
                                                 <td>
                                                     <a href="{{ Storage::url('avatars/' . $admin->avatar) }}" target="_blank">
-                                                        <img src="{{ Storage::url('avatars/' . $admin->avatar) }}" width="100" alt="{{ $admin->name }} Avatar" class="img-fluid">
+                                                        <img src="{{ Storage::url('avatars/' . $admin->avatar) }}" width="100" alt="{{ $admin->name }} Avatar" class="img-fluid img-thumbnail">
                                                     </a>
                                                 </td>
                                                 <td>{{ $admin->name }}</td>
                                                 <td>{{ $admin->email }}</td>
-                                                <td>{{ $admin->account_status }}</td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center gap-2">
-                                                        <a href="{{ route('admin.admin.edit', $admin) }}"
-                                                            class="btn btn-primary">
-                                                            <i class="fa fa-edit"></i>
-                                                        </a>
-                                                        <form onclick="return confirm('are you sure !')"
-                                                            action="{{ route('admin.users.destroy', $admin) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-danger" type="submit"><i
-                                                                    class="fa fa-trash"></i></button>
-                                                        </form>
-                                                    </div>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

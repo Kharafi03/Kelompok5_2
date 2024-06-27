@@ -22,6 +22,7 @@
                                             <th>No</th>
                                             <th>Gambar</th>
                                             <th>Nama</th>
+                                            <th>Plat Nomor</th>
                                             <th>Type Mobil</th>
                                             <th>Harga Sewa</th>
                                             <th>Jumlah Penumpang</th>
@@ -38,6 +39,7 @@
                                                     <img src="{{ asset('storage/' . $cars->image1) }}" alt="image" class="img-fluid" width="100">
                                                 </td>
                                                 <td>{{ $cars->nama_mobil }}</td>
+                                                <td>{{ $cars->plat_nomor }}</td>
                                                 <td>
                                                     <span class="badge bg-primary">
                                                         {{ $cars->type->nama }}
@@ -53,9 +55,7 @@
                                                             class="btn btn-primary">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <form onclick="return confirm('are you sure !')"
-                                                            action="{{ route('admin.cars.destroy', $cars) }}"
-                                                            method="POST">
+                                                        <form action="{{ route('admin.cars.destroy', $cars) }}" method="POST" class="delete-form">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-danger" type="submit"><i
@@ -65,9 +65,6 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <tr>
-                                                <td class="text-center">Data Kosong !</td>
-                                            </tr>
                                         @endforelse
                                 </table>
                             </div>

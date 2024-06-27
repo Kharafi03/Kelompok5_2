@@ -19,9 +19,11 @@ class BookingController extends Controller
         $status = $request->input('status');
 
         if ($status) {
-            $bookings = Booking::where('booking_status', $status)->get();
+            $bookings = Booking::where('booking_status', $status)
+            ->orderByDesc('created_at')
+            ->get();
         } else {
-            $bookings = Booking::all();
+            $bookings = Booking::orderByDesc('created_at')->get();
         }
 
         return view('admin.bookings.index', compact('bookings'));
@@ -73,7 +75,10 @@ class BookingController extends Controller
 
         $booking->update($validatedData);
 
-        return redirect()->route('admin.bookings.index')->with('success', 'Booking updated successfully.');
+        return redirect()->route('admin.bookings.index')->with([
+            'message' => 'Data booking berhasil di update!',
+            'alert-type' => 'success'
+        ]);
     }
 
     /**
@@ -84,7 +89,7 @@ class BookingController extends Controller
         $booking->delete();
 
         return redirect()->back()->with([
-            'message' => 'berhasil di hapus !',
+            'message' => 'Data booking berhasil di hapus!',
             'alert-type' => 'danger'
         ]);
     }

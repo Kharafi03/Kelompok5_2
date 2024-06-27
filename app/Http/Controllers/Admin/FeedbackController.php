@@ -15,7 +15,8 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        $feedbacks = Feedback::get();
+        $feedbacks = Feedback::get()
+        ->sortByDesc('created_at');
 
         return view('admin.feedbacks.index', compact('feedbacks'));
     }
@@ -24,6 +25,9 @@ class FeedbackController extends Controller
     {
         $feedback = Feedback::findorFail($id);
         $feedback->delete();
-        return back();
+        return redirect()->back()->with([
+            'message' => 'Data feedback berhasil di hapus!',
+            'alert-type' => 'success'
+        ]);
     }
 }    

@@ -11,10 +11,12 @@
         @page {
             size: landscape;
         }
-        .table td  {
+
+        .table td {
             white-space: normal;
             word-wrap: break-word;
         }
+
         .table th {
             white-space: normal;
             word-wrap: break-word;
@@ -51,7 +53,15 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $totalPendapatan = 0;
+                @endphp
                 @foreach ($bookings as $booking)
+                    @if ($booking->booking_status == 'Selesai')
+                        @php
+                            $totalPendapatan += $booking->total_fee;
+                        @endphp
+                    @endif
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $booking->user->name }}</td>
@@ -68,6 +78,8 @@
                 @endforeach
             </tbody>
         </table>
+
+        <p>Total Pendapatan: Rp {{ number_format($totalPendapatan, 0, ',', '.') }}</p>
     </div>
 </body>
 

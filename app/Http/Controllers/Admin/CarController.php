@@ -27,6 +27,7 @@ class CarController extends Controller
     {
         $request->validate([
             'nama_mobil' => 'required|string|max:255',
+            'plat_nomor' => 'required|string|max:10',
             'type_id' => 'required|integer',
             'price' => 'required|numeric',
             'penumpang' => 'required|integer',
@@ -41,6 +42,7 @@ class CarController extends Controller
 
         $car = new Car();
         $car->nama_mobil = $request->nama_mobil;
+        $car->plat_nomor = $request->plat_nomor;
         $car->type_id = $request->type_id;
         $car->price = $request->price;
         $car->penumpang = $request->penumpang;
@@ -64,7 +66,10 @@ class CarController extends Controller
         $car->status = $request->status;
         $car->save();
 
-        return redirect()->route('admin.cars.index')->with('success', 'cars created successfully.');
+        return redirect()->route('admin.cars.index')->with([
+            'message' => 'Data mobil berhasil ditambahkan!',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function show($id)
@@ -84,6 +89,7 @@ class CarController extends Controller
     {
         $request->validate([
             'nama_mobil' => 'required|string|max:255',
+            'plat_nomor' => 'required|string|max:10',
             'type_id' => 'required|integer',
             'price' => 'required|numeric',
             'penumpang' => 'required|integer',
@@ -97,6 +103,7 @@ class CarController extends Controller
         ]);
 
         $car->nama_mobil = $request->nama_mobil;
+        $car->plat_nomor = $request->plat_nomor;
         $car->type_id = $request->type_id;
         $car->price = $request->price;
         $car->pintu= $request->pintu;
@@ -132,7 +139,10 @@ class CarController extends Controller
         $car->status = $request->status;
         $car->save();
 
-        return redirect()->route('admin.cars.index')->with('success', 'Car updated successfully.');
+        return redirect()->route('admin.cars.index')->with([
+            'message' => 'Data mobil berhasil diperbarui!',
+            'alert-type' => 'success'
+        ]);
     }
     public function editImage($id, $image)
     {
@@ -157,7 +167,10 @@ class CarController extends Controller
 
         $car->save();
 
-        return redirect()->route('admin.cars.edit', $car)->with('success', 'Gambar berhasil diperbarui.');
+        return redirect()->route('admin.cars.edit', $car)->with([
+            'message' => 'Gambar mobil berhasil diperbarui!',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function destroy(Car $car)
@@ -177,6 +190,9 @@ class CarController extends Controller
 
         $car->delete();
 
-        return redirect()->back()->with('success', 'Car deleted successfully.');
+        return redirect()->back()->with([
+            'message' => 'Data mobil berhasil di hapus!',
+            'alert-type' => 'success'
+        ]);
     }
 }

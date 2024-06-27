@@ -5,14 +5,16 @@
         <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
             <div class="col-md-6 p-5 mt-lg-5 wow fadeInLeft" data-wow-delay="0.1s">
                 <h1 class="display-5 animated fadeIn mb-4>
-                    <span class="text-primary">OtoRent</span> Solusi Perjalanan Anda!
+                    <span class="text-primary">
+                    {{ $setting->nama_perusahaan }}</span>
+                    Solusi Perjalanan Anda!
                 </h1>
                 <h5 class="animated fadeIn pb-2">Temukan Mobil dan Motor terbaik untuk setiap perjalanan Anda!</h5>
                 <h5 class="animated fadeIn pb-2">Sewa sekarang dan rasakan kenyamanannya!</h5>
                 <h4><i class="fa fa-check text-primary me-3"></i>Mudah</h4>
                 <h4><i class="fa fa-check text-primary me-3"></i>Aman</h4>
                 <h4><i class="fa fa-check text-primary me-3"></i>Nyaman</h4>
-                <a href="" class="btn btn-primary mt-3 py-3 px-5 me-3 animated fadeIn">Pesan Sekarang</a>
+                <a href="#more" class="btn btn-primary mt-3 py-3 px-5 me-3 animated fadeIn">Selengkapnya</a>
             </div>
             <div class="col-md-6 wow fadeInRight" data-wow-delay="0.1s">
                 <div class="owl-carousel header-carousel">
@@ -20,59 +22,74 @@
                         <img class="img-fluid" src="{{ asset('frontend/img/carousel/carousel-1.jpg') }}" alt="">
                     </div>
                     <div class="owl-carousel-item">
-                        <img class="img-fluid" src="{{ asset('frontend/img/carousel/carousel-calya.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('frontend/img/carousel/carousel-2.jpg') }}" alt="">
                     </div>
                     <div class="owl-carousel-item">
-                        <img class="img-fluid" src="{{ asset('frontend/img/carousel/carousel-innova.jpg') }}"
-                            alt="">
+                        <img class="img-fluid" src="{{ asset('frontend/img/carousel/carousel-3.jpg') }}" alt="">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Header End -->
+
     <!-- Search Start -->
     <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.3s" style="padding: 35px;">
+
         <div class="container">
-            <form id="searchForm" method="GET">
+            @if (session('status'))
+                <div class="alert alert-success text-center text-white">
+                    {{ session('status') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger text-white">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form id="searchForm" method="GET" action="{{ route('cari-kendaraan') }}">
                 <div class="row g-2">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="row g-2">
-                                    <div class="col-md-3 mr-2">
-                                        <h4 class="text-white mb-3">Kendaraan</h4>
-                                        <select id="kendaraan" name="kendaraan" class="form-select border-0 py-3">
+                                    <div class="col-xl-3 col-md-6 mr-2">
+                                        <h5 class="text-white mb-3">Kendaraan</h5>
+                                        <select id="kendaraan" name="kendaraan" class="form-select border-0 py-3 mt-auto">
                                             <option value="" hidden>Pilih Kendaraan</option>
                                             <option value="Mobil">Mobil</option>
                                             <option value="Motor">Motor</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mr-2">
-                                        <h4 class="text-white mb-3">Rentang Harga</h4>
-                                        <select id="harga" name="harga" class="form-select border-0 py-3">
+                                    <div class="col-xl-3 col-md-6 mr-2">
+                                        <h5 class="text-white mb-3">Rentang Harga</h5>
+                                        <select id="harga" name="harga" class="form-select border-0 py-3 mt-auto">
                                             <option value="" hidden>Pilih Rentang Harga</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mr-2">
-                                        <h4 class="text-white mb-3">Kategori</h4>
-                                        <select name="category_id" id="category_id" class="form-select border-0 py-3">
+                                    <div class="col-xl-3 col-md-6 mr-2">
+                                        <h5 class="text-white mb-3">Kategori</h5>
+                                        <select name="category_id" id="category_id"
+                                            class="form-select border-0 py-3 mt-auto">
                                             <option value="" hidden>Pilih Kategori</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mr-2">
-                                        <h4 class="text-white mb-3">Jumlah Penumpang</h4>
-                                        <select name="penumpang" class="form-select border-0 py-3">
-                                            <option value="" hidden>Jumlah Penumpang</option>
-                                            <option value="2">2</option>
-                                            <option value="4">4</option>
-                                            <option value="8">8</option>
+                                    <div class="col-xl-3 col-md-6 mr-2">
+                                        <h5 class="text-white mb-3">Jumlah Penumpang</h5>
+                                        <select name="penumpang" class="form-select border-0 py-3 mt-auto">
+                                            <option value="" hidden>Pilih Jumlah Penumpang</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
-                                <button type="button" id="searchButton" class="btn btn-dark border-0 w-100 py-3" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="carContainer">Cari</button>
+                                <button type="submit" id="searchButton"
+                                    class="btn btn-dark border-0 w-100 py-3 mt-3 mt-md-0" disabled>Cari</button>
                             </div>
                         </div>
                     </div>
@@ -80,23 +97,23 @@
             </form>
         </div>
     </div>
-    <!-- Kelebihan Jasa di OtoRent -->
-    <div class="container py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <!-- Kenapa harus di OtoRent -->
+    <div class="container py-5 wow fadeInUp" data-wow-delay="0.1s" id="more">
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
-                <h1 class="mb-4"><strong>Kelebihan Jasa di OtoRent Dibandingkan Rental Lainnya</strong></h1>
-                <p class="lead mb-5">Temukan Alasan Mengapa OtoRent Menjadi Pilihan Terbaik Anda</p>
+                <h1 class="mb-4"><strong>Kenapa Harus di {{ $setting->nama_perusahaan }} ?</strong></h1>
+                <p class="lead mb-5">Berikut Alasan Mengapa {{ $setting->nama_perusahaan }} Menjadi Pilihan Terbaik Anda</p>
             </div>
         </div>
         <div class="row text-center">
             @php
                 $advantages = [
                     [
-                        'title' => 'Murah, Aman dan Nyaman',
+                        'title' => 'Mudah, Aman dan Nyaman',
                         'icon' => 'fas fa-shield-alt',
                     ],
                     [
-                        'title' => 'Proses Mudah dan Cepat',
+                        'title' => 'Proses Cepat dan Praktis',
                         'icon' => 'fas fa-tachometer-alt',
                     ],
                     [
@@ -129,25 +146,18 @@
             @endforeach
         </div>
     </div>
-    <!--End Kelebihan-->
+    <!--End  Mengapa-->
     <!-- Cara Pemesanan -->
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8 text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h1 class="mb-4"><strong>Cara Pemesanan</strong></h1>
-                <p class="lead mb-5">Ikuti Langkah Mudah Ini untuk Menyewa di OtoRent</p>
+                <p class="lead mb-5">Ikuti Langkah Mudah Ini untuk Menyewa di {{ $setting->nama_perusahaan }}</p>
             </div>
         </div>
         <div class="row text-center">
             @php
                 $steps = [
-                    [
-                        'title' => 'Pilih Layanan dan Jadwal Rental',
-                        'description' =>
-                            'Pilih layanan yang Anda inginkan dan tentukan jadwal rental yang sesuai dengan kebutuhan Anda.',
-                        'icon' => 'fas fa-car',
-                        'color' => 'text-primary',
-                    ],
                     [
                         'title' => 'Melengkapi Data Diri',
                         'description' =>
@@ -156,14 +166,22 @@
                         'color' => 'text-success',
                     ],
                     [
-                        'title' => 'OtoRent Melakukan Konfirmasi Pesanan',
-                        'description' => 'Tunggu konfirmasi pesanan dari OtoRent melalui email atau pesan singkat.',
+                        'title' => 'Memilih Kendaraan',
+                        'description' =>
+                            'Pilih kendaraan yang Anda inginkan dan tentukan jadwal rental yang sesuai dengan kebutuhan Anda.',
+                        'icon' => 'fas fa-tachometer-alt',
+                        'color' => 'text-primary',
+                    ],
+                    [
+                        'title' => 'Melakukan Pembayaran',
+                        'description' =>
+                            'Kami telah menyediakan proses pembayaran melalui transfer bank dan dompet digital',
                         'icon' => 'fas fa-check',
                         'color' => 'text-warning',
                     ],
                     [
-                        'title' => 'Layanan Siap Digunakan Sesuai Jadwal',
-                        'description' => 'Nikmati layanan rental sesuai dengan jadwal yang telah Anda tentukan.',
+                        'title' => 'Kendaraan Siap Pakai',
+                        'description' => 'Nikmati kendaraan rental sesuai dengan jadwal yang telah Anda tentukan.',
                         'icon' => 'fas fa-clock',
                         'color' => 'text-danger',
                     ],
@@ -191,27 +209,20 @@
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                        <img class="img-fluid w-100" src="frontend/img/assets/assets-dedikasi.jpg">
+                        <img class="img-fluid w-100" src="{{ asset('frontend/img/header/about-us-1.jpg') }}">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <h1 class="mb-4">Dedikasi Kami Untuk Anda</h1>
-                    <p class="mb-4" style="text-align: justify">Kami percaya bahwa perjalanan Anda layak mendapatkan
-                        yang
-                        terbaik. Dengan armada yang berkualitas dan layanan pelanggan yang profesional, kami berkomitmen
-                        untuk menghadirkan pengalaman berkendara yang luar biasa. Nikmati kenyamanan dan kemudahan dalam
-                        setiap perjalanan Anda bersama kami dengan :</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Kendaraan yang selalu terjaga kebersihannya dan dalam
-                        kondisi prima</p>
+                    <h1 class="mb-4">Tentang Kami</h1>
+                    <p class="mb-4" style="text-align: justify">{{ $setting->tentang_perusahaan }}</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Kendaraan yang selalu terjaga kebersihannya</p>
                     <p><i class="fa fa-check text-primary me-3"></i>Pengemudi yang berpengalaman dan ramah</p>
                     <p><i class="fa fa-check text-primary me-3"></i>Sistem pemesanan yang mudah dan cepat</p>
-                    <a class="btn btn-primary py-3 px-5 mt-3" href="">Pesan Sekarang</a>
                 </div>
             </div>
         </div>
     </div>
     <!-- About End -->
-
     <!-- Property List Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -236,11 +247,15 @@
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
-                        @foreach ($cars as $car)
+                        @php
+                            $randomCars = $cars->shuffle()->take(6);
+                        @endphp
+                        @foreach ($randomCars as $car)
                             <div class="col-lg-4 col-md-6 car-item" data-category="{{ $car->type->nama }}"
                                 data-passenger="{{ $car->penumpang }}">
-                                <div class="property-item rounded overflow-hidden wow fadeInUp" data-wow-delay="{{ $loop->iteration * 0.2 }}s">
-                                    <div class="position-relative overflow-hidden">
+                                <div class="property-item rounded overflow-hidden wow fadeInUp"
+                                    data-wow-delay="{{ $loop->iteration * 0.2 }}s">
+                                    <div class="position-relative overflow-hidden image-container">
                                         <img class="img-fluid" src="{{ Storage::url($car->image1) }}"
                                             alt="gambar-mobil">
                                         <div
@@ -251,8 +266,7 @@
                                     <div class="p-4 property-content">
                                         <h5 class="text-primary mb-3 price">Rp. {{ number_format($car->price) }} / hari
                                         </h5>
-                                        <a class="d-block h5 mb-2" href="">{{ $car->nama_mobil }}</a>
-                                        <p style="text-align: justify"></i>{{ $car->description }}</p>
+                                        <p class="d-block h5 mb-2" href="">{{ $car->nama_mobil }}</p>
                                     </div>
                                     <div class="property-footer">
                                         <div class="d-flex justify-content-end p-4 pb-0">
@@ -275,17 +289,21 @@
                             </div>
                         @endforeach
                         <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                            <a class="btn btn-primary py-3 px-5" href="">Cari Mobil Lainnya</a>
+                            <a class="btn btn-primary py-3 px-5" href="{{ url('daftar-mobil') }}">Cari Mobil Lainnya</a>
                         </div>
                     </div>
                 </div>
                 <div id="tab-2" class="tab-pane fade show p-0">
                     <div class="row g-4">
-                        @foreach ($motorcycles as $motorcycle)
+                        @php
+                            $randomizedMotorcycles = $motorcycles->shuffle()->take(6);
+                        @endphp
+                        @foreach ($randomizedMotorcycles as $motorcycle)
                             <div class="col-lg-4 col-md-6 car-item" data-category="{{ $motorcycle->type->nama }}"
                                 data-passenger="{{ $motorcycle->penumpang }}">
-                                <div class="property-item rounded overflow-hidden wow fadeInUp" data-wow-delay="{{ $loop->iteration * 0.2 }}s">
-                                    <div class="position-relative overflow-hidden">
+                                <div class="property-item rounded overflow-hidden wow fadeInUp"
+                                    data-wow-delay="{{ $loop->iteration * 0.2 }}s">
+                                    <div class="position-relative overflow-hidden image-container">
                                         <img class="img-fluid" src="{{ Storage::url($motorcycle->image1) }}"
                                             alt="gambar-mobil">
                                         <div
@@ -296,8 +314,7 @@
                                     <div class="p-4 property-content">
                                         <h5 class="text-primary mb-3 price">Rp. {{ number_format($motorcycle->price) }} /
                                             hari</h5>
-                                        <a class="d-block h5 mb-2" href="">{{ $motorcycle->nama_motor }}</a>
-                                        <p style="text-align: justify"></i>{{ $motorcycle->description }}</p>
+                                        <p class="d-block h5 mb-2" href="">{{ $motorcycle->nama_motor }}</p>
                                     </div>
                                     <div class="property-footer">
                                         <div class="d-flex justify-content-end p-4 pb-0">
@@ -305,23 +322,13 @@
                                                 class="btn btn-primary btn-pesan btn-lg">Pesan</a>
                                         </div>
                                         <div class="d-flex border-top mt-3">
-                                            <div class="flex-fill text-center border-end py-3">
-                                                <i
-                                                    class="fa-solid fa-person text-primary me-2"></i>{{ $motorcycle->penumpang }}
-                                                Penumpang
-                                            </div>
-                                            <div class="flex-fill text-center py-3">
-                                                <i
-                                                    class="fa-solid fa-door-closed text-primary me-2"></i>{{ $motorcycle->pintu }}
-                                                Pintu
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                         <div class="col-12 text-center" data-wow-delay="0.1s">
-                            <a class="btn btn-primary py-3 px-5" href="">Cari Motor Lainnya</a>
+                            <a class="btn btn-primary py-3 px-5" href="{{ url('daftar-motor') }}">Cari Motor Lainnya</a>
                         </div>
                     </div>
                 </div>
@@ -329,7 +336,6 @@
         </div>
     </div>
     <!-- Property List End -->
-
     <!-- Testimonial Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -338,17 +344,41 @@
                 <p>Dengarkan apa yang pelanggan kami katakan:</p>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                @foreach ($testimonials as $testimonial)
+                @foreach ($feedbacks as $feedback)
                     <div class="testimonial-item bg-light rounded p-3">
                         <div class="bg-white border rounded p-4">
-                            <p>{{ $testimonial->pesan }}</p>
+                            @if ($feedback->vehicle_type == 'car')
+                                @php
+                                    $vehicle = $cars->where('id', $feedback->vehicle_id)->first();
+                                @endphp
+                                @if ($vehicle)
+                                    <h3>{{ $vehicle->nama_mobil }} - {{ $vehicle->type->nama }}</h3>
+                                @endif
+                            @else
+                                @php
+                                    $vehicle = $motorcycles->where('id', $feedback->vehicle_id)->first();
+                                @endphp
+                                @if ($vehicle)
+                                    <h3>{{ $vehicle->nama_motor }} - {{ $vehicle->type->nama }}</h3>
+                                @endif
+                            @endif
+                            <p>{{ $feedback->feedback }}</p>
                             <div class="d-flex align-items-center">
+                                <div class="col mb-3">
+                                    @for ($i = 0; $i < $feedback->rating; $i++)
+                                        <i class="fas fa-star text-warning"></i>
+                                    @endfor
+                                    @for ($i = $feedback->rating; $i < 5; $i++)
+                                        <i class="fas fa-star text-secondary"></i>
+                                    @endfor
+                                    <span class="ms-2">{{ $feedback->rating }}</span>
+                                </div>
                                 <img class="img-fluid flex-shrink-0 rounded"
-                                    src="{{ Storage::url($testimonial->profile) }}" alt=""
+                                    src="{{ asset('storage/avatars/' . $feedback->avatar) }}" alt=""
                                     style="width: 45px; height: 45px;">
                                 <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">{{ $testimonial->name }}</h6>
-                                    <small>{{ $testimonial->pekerjaan }}</small>
+                                    <h6 class="fw-bold mb-1">{{ $feedback->user_name }}</h6>
+                                    <small>{{ $feedback->created_at->format('M d, Y') }}</small>
                                 </div>
                             </div>
                         </div>
@@ -361,156 +391,35 @@
 
     <!-- Faq Start -->
     <div class="container-xxl py-5">
-        <div class="container">
+        <div class="container" id="faqs">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s">
                 <h1 class="mb-3">Pertanyaan Umum</h1>
             </div>
             <div class="accordion wow fadeInUp" data-wow-delay="0.1s" id="accordionExample">
                 <!-- Accordion Item 1 -->
-                <div class="accordion-item mb-3">
-                    <div class="accordion-card card shadow-sm">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span class="accordion-title">1. Bagaimana cara melakukan pemesanan mobil?</span>
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Kunjungi halaman pemesanan kami, Pilih jenis mobil yang diinginkan, pilih tanggal dan waktu
-                                sewa. Setelah mengisi formulir pemesanan, Anda harus membayar biaya sewa dan admin akan
-                                mengkonfirmasi sewa.
+                @foreach ($faqs as $faq)
+                    <div class="accordion-item mb-3">
+                        <div class="accordion-card card shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ $faq->id }}" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    <span class="accordion-title">{{ $loop->iteration }}. {{ $faq->question }}</span>
+                                </button>
+                            </h2>
+                            <div id="collapse{{ $faq->id }}" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    {{ $faq->answer }}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Accordion Item 2 -->
-                <div class="accordion-item mb-3">
-                    <div class="accordion-card card shadow-sm">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="accordion-title">2. Apa syarat dan ketentuan untuk menyewa mobil?</span>
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Anda harus memiliki usia minimal 21 tahun. Memiliki SIM yang masih berlaku. Menyediakan
-                                identitas yang valid, seperti KTP.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Accordion Item 3 -->
-                <div class="accordion-item mb-3">
-                    <div class="accordion-card card shadow-sm">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <span class="accordion-title">3. Bagaimana metode pembayaran yang diterima?</span>
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Kami menerima pembayaran dengan Transfer Rekening Bank.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Accordion Item 4 -->
-                <div class="accordion-item mb-3">
-                    <div class="accordion-card card shadow-sm">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                <span class="accordion-title">4. Apakah ada biaya tambahan yang harus saya bayar?</span>
-                            </button>
-                        </h2>
-                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Biaya sewa mobil sudah termasuk dalam harga yang tertera. Namun, biaya seperti, biaya
-                                pengemudi
-                                tambahan dan biaya bahan bakar kendaraan ditanggung penyewa.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Accordion Item 5 -->
-                <div class="accordion-item mb-3">
-                    <div class="accordion-card card shadow-sm">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                <span class="accordion-title">5. Bagaimana kebijakan pembatalan?</span>
-                            </button>
-                        </h2>
-                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Kebijakan pembatalan dapat bervariasi tergantung pada waktu pembatalan dan tipe penyewaan.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Accordion Item 6 -->
-                <div class="accordion-item mb-3">
-                    <div class="accordion-card card shadow-sm">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                <span class="accordion-title">6. Apakah ada batasan jarak perjalanan?</span>
-                            </button>
-                        </h2>
-                        <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Biasanya, kami memberikan jarak perjalanan yang tidak terbatas.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Accordion Item 7 -->
-                <div class="accordion-item mb-3">
-                    <div class="accordion-card card shadow-sm">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                <span class="accordion-title">7. Apakah saya dapat mengubah atau membatalkan pemesanan
-                                    saya?</span>
-                            </button>
-                        </h2>
-                        <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Untuk mengubah atau membatalkan pemesanan, silakan hubungi tim dukungan kami melalui email
-                                atau telepon.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Accordion Item 8 -->
-                <div class="accordion-item">
-                    <div class="accordion-card card shadow-sm">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                <span class="accordion-title">8. Bagaimana cara menghubungi tim dukungan pelanggan?</span>
-                            </button>
-                        </h2>
-                        <div id="collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                Anda dapat menghubungi tim dukungan kami melalui nomor telepon atau email yang tercantum di
-                                halaman kontak kami.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
     <!-- Faq End -->
-
-
-
-
-
     <!-- Call to Action Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -519,19 +428,15 @@
                     <div class="row g-5 align-items-center">
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                             <img class="img-fluid rounded w-100"
-                                src="{{ asset('frontend/img/assets/assets-contact.jpg') }}" alt="">
+                                src="{{ asset('frontend/img/assets/contact-after.jpg') }}" alt="">
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                             <div class="mb-4">
                                 <h1 class="mb-3">Hubungi Kami</h1>
-                                <p style="text-align: justify">Kami siap membantu Anda merencanakan perjalanan dengan
-                                    armada terbaik dan layanan pelanggan yang ramah dan profesional. Nikmati kenyamanan dan
-                                    keamanan dengan kendaraan yang terawat dan pemesanan yang mudah bersama kami.</p>
+                                <p style="text-align: justify">{{ $setting->hubungi_kami }}</p>
                             </div>
-                            <a href="" class="btn btn-primary py-3 px-4 me-2"><i
+                            <a href="https://wa.me/{{ $setting->phone }}" class="btn btn-primary py-3 px-4 me-2"><i
                                     class="fa fa-phone-alt me-2"></i>Telepon Kami</a>
-                            <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Buat
-                                Pemesanan</a>
                         </div>
                     </div>
                 </div>
@@ -555,136 +460,167 @@
         .property-footer {
             margin-top: auto;
         }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+        }
+
+        .image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 @endpush
 @push('script-alt')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var kendaraanSelect = document.getElementById('kendaraan');
-        var hargaSelect = document.getElementById('harga');
-        var categorySelect = document.getElementById('category_id');
-        var penumpangSelect = document.querySelector('select[name="penumpang"]');
+    <script>
+        $(document).ready(function() {
+            var kendaraanSelect = $('#kendaraan');
+            var hargaSelect = $('#harga');
+            var categorySelect = $('#category_id');
+            var penumpangSelect = $('select[name="penumpang"]');
+            var searchButton = $('#searchButton');
+            var inputs = $('input, select');
 
-        var hargaMobil = [
-            { value: '0-100000', text: 'Rp. 0 - Rp. 100.000' },
-            { value: '100000-200000', text: 'Rp. 100.000 - Rp. 200.000' },
-            { value: '200000-300000', text: 'Rp. 200.000 - Rp. 300.000' },
-            { value: '300000-400000', text: 'Rp. 300.000 - Rp. 400.000' },
-            { value: '400000-500000', text: 'Rp. 400.000 - Rp. 500.000' },
-            { value: '500000-1000000', text: 'Rp. 500.000 - Rp. 1.000.000' }
-        ];
-
-        var hargaMotor = [
-            { value: '0-50000', text: 'Rp. 0 - Rp. 50.000' },
-            { value: '50000-100000', text: 'Rp. 50.000 - Rp. 100.000' },
-            { value: '100000-200000', text: 'Rp. 100.000 - Rp. 200.000' },
-            { value: '200000-300000', text: 'Rp. 200.000 - Rp. 300.000' },
-            { value: '300000-400000', text: 'Rp. 300.000 - Rp. 400.000' },
-            { value: '400000-500000', text: 'Rp. 400.000 - Rp. 500.000' }
-        ];
-
-        var categoriesMobil = [
-            { value: '1', text: 'Sedan' },
-            { value: '2', text: 'SUV' },
-            { value: '3', text: 'MPV' },
-            { value: '4', text: 'Hatchback' }
-        ];
-
-        var categoriesMotor = [
-            { value: '5', text: 'Sport' },
-            { value: '6', text: 'Matic' },
-            { value: '7', text: 'Manual' },
-            { value: '8', text: 'Bebek' }
-        ];
-
-        kendaraanSelect.addEventListener('change', function() {
-            var selectedKendaraan = this.value;
-            updateHargaOptions(selectedKendaraan);
-            updateCategoryOptions(selectedKendaraan);
-            updatePenumpangSelect(selectedKendaraan);
-        });
-
-        function updateHargaOptions(kendaraan) {
-            hargaSelect.innerHTML = '<option value="" hidden>Pilih Rentang Harga</option>';
-            var hargaOptions = kendaraan === 'Mobil' ? hargaMobil : hargaMotor;
-
-            hargaOptions.forEach(function(option) {
-                var opt = document.createElement('option');
-                opt.value = option.value;
-                opt.textContent = option.text;
-                hargaSelect.appendChild(opt);
+            inputs.on('input', function() {
+                toggleSearchButton();
             });
-        }
 
-        function updateCategoryOptions(kendaraan) {
-            categorySelect.innerHTML = '<option value="" hidden>Pilih Kategori</option>';
-            var categoryOptions = kendaraan === 'Mobil' ? categoriesMobil : categoriesMotor;
+            function toggleSearchButton() {
+                var isInputEmpty = true;
+                inputs.each(function() {
+                    if ($(this).val().trim() !== '') {
+                        isInputEmpty = false;
+                    }
+                });
 
-            categoryOptions.forEach(function(option) {
-                var opt = document.createElement('option');
-                opt.value = option.value;
-                opt.textContent = option.text;
-                categorySelect.appendChild(opt);
+                if (isInputEmpty) {
+                    searchButton.prop('disabled', true);
+                } else {
+                    searchButton.prop('disabled', false);
+                }
+            }
+
+            kendaraanSelect.on('change', function() {
+                var selectedKendaraan = $(this).val();
+                fetchCategories(selectedKendaraan);
+                updateHargaOptions(selectedKendaraan);
+                disablePenumpangSelect(selectedKendaraan);
+                updateJumlahPenumpang(selectedKendaraan);
             });
-        }
 
-        function updatePenumpangSelect(kendaraan) {
-            if (kendaraan === 'Motor') {
-                penumpangSelect.setAttribute('disabled', 'disabled');
-                penumpangSelect.selectedIndex = 0; // Reset value to default
-            } else {
-                penumpangSelect.removeAttribute('disabled');
+            function updateHargaOptions(kendaraan) {
+                hargaSelect.html('<option value="" hidden>Pilih Rentang Harga</option>');
+                var hargaOptions;
+
+                if (kendaraan === 'Mobil') {
+                    hargaOptions = [{
+                            value: '300000-500000',
+                            text: 'Rp. 300.000 - Rp. 500.000'
+                        },
+                        {
+                            value: '500000-700000',
+                            text: 'Rp. 500.000 - Rp. 700.000'
+                        },
+                        {
+                            value: '700000-1000000',
+                            text: 'Rp. 700.000 - Rp. 1.000.000'
+                        },
+                        {
+                            value: '1000000-1500000',
+                            text: 'Rp. 1.000.000 - Rp. 1.500.000'
+                        }
+                    ];
+                } else if (kendaraan === 'Motor') {
+                    hargaOptions = [{
+                            value: '60000-100000',
+                            text: 'Rp. 60.000 - Rp. 100.000'
+                        },
+                        {
+                            value: '100000-200000',
+                            text: 'Rp. 100.000 - Rp. 200.000'
+                        },
+                        {
+                            value: '200000-300000',
+                            text: 'Rp. 200.000 - Rp. 300.000'
+                        }
+                    ];
+                } else {
+                    return;
+                }
+
+                $.each(hargaOptions, function(index, option) {
+                    hargaSelect.append($('<option>', {
+                        value: option.value,
+                        text: option.text
+                    }));
+                });
             }
-        }
 
-        // Inisialisasi opsi rentang harga dan kategori berdasarkan pilihan kendaraan awal (jika ada)
-        updateHargaOptions(kendaraanSelect.value);
-        updateCategoryOptions(kendaraanSelect.value);
-        updatePenumpangSelect(kendaraanSelect.value);
-    });
+            function updateJumlahPenumpang(kendaraan) {
+                penumpangSelect.html('<option value="" hidden>Pilih Jumlah Penumpang</option>');
+                var penumpangOptions;
 
-    document.getElementById('searchButton').addEventListener('click', function() {
-        var kendaraan = document.getElementById('kendaraan').value;
-        var harga = document.getElementById('harga').value;
-        var category = document.getElementById('category_id').value;
-        var penumpang = document.querySelector('select[name="penumpang"]').value;
-        var carContainer = document.getElementById('carContainer');
-        var carItems = document.querySelectorAll('.card-car-item');
+                if (kendaraan === 'Mobil') {
+                    penumpangOptions = [{
+                            value: '4',
+                            text: '4 Penumpang'
+                        },
+                        {
+                            value: '6',
+                            text: '6 Penumpang'
+                        },
+                        {
+                            value: '8',
+                            text: '8 Penumpang'
+                        }
+                    ];
+                }
 
-        carItems.forEach(function(item) {
-            var itemCategory = item.getAttribute('data-category');
-            var itemPassenger = item.getAttribute('data-passenger');
-            var itemPrice = parseInt(item.getAttribute('data-price'), 10);
-
-            var hargaRange = harga.split('-').map(function(val) { return parseInt(val, 10); });
-            var hargaMin = hargaRange[0];
-            var hargaMax = hargaRange[1];
-
-            var isVisible = true;
-
-            if (kendaraan && itemCategory !== kendaraan) {
-                isVisible = false;
-            }
-            if (harga && (itemPrice < hargaMin || itemPrice > hargaMax)) {
-                isVisible = false;
-            }
-            if (category && itemCategory !== category) {
-                isVisible = false;
-            }
-            if (penumpang && itemPassenger != penumpang) {
-                isVisible = false;
+                $.each(penumpangOptions, function(index, option) {
+                    penumpangSelect.append($('<option>', {
+                        value: option.value,
+                        text: option.text
+                    }));
+                });
             }
 
-            if (isVisible) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
+            function disablePenumpangSelect(kendaraan) {
+                if (kendaraan === 'Motor') {
+                    penumpangSelect.prop('disabled', true).val('');
+                } else {
+                    penumpangSelect.prop('disabled', false);
+                }
+            }
+
+            function fetchCategories(kendaraan) {
+                categorySelect.html('<option value="" hidden>Pilih Kategori</option>');
+
+                var url;
+                if (kendaraan === 'Mobil') {
+                    url = '{{ route('car.categories') }}';
+                } else if (kendaraan === 'Motor') {
+                    url = '{{ route('motor.categories') }}';
+                } else {
+                    return;
+                }
+
+                $.get(url, function(data) {
+                    $.each(data, function(index, category) {
+                        categorySelect.append($('<option>', {
+                            value: category.id,
+                            text: category.nama
+                        }));
+                    });
+                });
             }
         });
-
-        carContainer.classList.add('show');
-    });
-
-</script>
-
+    </script>
 @endpush

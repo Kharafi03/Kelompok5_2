@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
     protected $fillable = [
         'vehicle_type',
         'vehicle_id',
@@ -47,5 +48,8 @@ class Booking extends Model
         return $this->belongsTo(User::class);
     }
     
-    
+    public function cancellation()
+    {
+        return $this->hasOne(Cancellation::class, 'booking_code', 'booking_code');
+    }
 }

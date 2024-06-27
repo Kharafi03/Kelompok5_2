@@ -34,7 +34,7 @@
                                                         <a href="{{ route('admin.typemotorcycles.edit', $type) }}" class="btn btn-primary">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <form onclick="return confirm('Are you sure?')" action="{{ route('admin.typemotorcycles.destroy', $type) }}" method="POST">
+                                                        <form action="{{ route('admin.typemotorcycles.destroy', $type) }}" method="POST" class="delete-form">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-danger" type="submit">
@@ -45,9 +45,6 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <tr>
-                                                <td colspan="3" class="text-center">Data Kosong!</td>
-                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

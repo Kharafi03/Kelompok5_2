@@ -6,11 +6,13 @@ use App\Models\Feedback;
 use App\Http\Requests\Frontend\FeedbackRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
     public function store(FeedbackRequest $request)
     {
+        $user = Auth::user();
         // Validasi input
         $validated = $request->validated();
 
@@ -34,7 +36,10 @@ class FeedbackController extends Controller
             'booking_code' => $bookingCode,
             'vehicle_type' => $vehicleType,
             'vehicle_id' => $vehicleId
-        ])->with('success', 'Feedback berhasil disimpan.');
+        ])->with([
+            'message' => 'Berhasil memberikan Feedback.',
+            'alert-type' => 'success'
+        ]);
     }
 
 }

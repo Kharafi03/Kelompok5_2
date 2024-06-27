@@ -33,7 +33,7 @@
                                                         <div class="mb-3">
                                                             <label for="start_date" class="col-form-label">Dari
                                                                 Tanggal:</label>
-                                                            <input type="date" class="form-control" id="start_date"
+                                                            <input type="date" class="form-control" id="start_date" required
                                                                 name="start_date">
                                                         </div>
                                                     </div>
@@ -41,7 +41,7 @@
                                                         <div class="mb-3">
                                                             <label for="end_date" class="col-form-label">Sampai
                                                                 Tanggal:</label>
-                                                            <input type="date" class="form-control" id="end_date"
+                                                            <input type="date" class="form-control" id="end_date" required
                                                                 name="end_date">
                                                         </div>
                                                     </div>
@@ -85,8 +85,8 @@
                                                 <td>{{ $booking->vehicle_type == 'car' ? $booking->vehicle->nama_mobil : $booking->vehicle->nama_motor }}
                                                 </td>
                                                 {{-- <td>{{ $booking->vehicle_type == 'car' ? $booking->vehicle->nama_mobil : $booking->vehicle->nama_motor }} - {{ $booking->vehicle->type->nama }}</td> --}}
-                                                <td>{{ $booking->start_date }}</td>
-                                                <td>{{ $booking->end_date }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($booking->start_date)->translatedFormat('j F Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($booking->end_date)->translatedFormat('j F Y') }}</td>
                                                 <td>{{ $booking->days_count }} Hari</td>
                                                 <td>{{ $booking->pickup }}</td>
                                                 <td>Rp {{ number_format($booking->total_fee, 0, ',', '.') }}</td>
@@ -97,10 +97,7 @@
                                                             class="btn btn-primary">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <form
-                                                            onsubmit="return confirm('Are you sure you want to delete this booking?')"
-                                                            action="{{ route('admin.bookings.destroy', $booking) }}"
-                                                            method="POST">
+                                                        <form action="{{ route('admin.bookings.destroy', $booking) }}" method="POST" class="delete-form">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-danger" type="submit"><i
@@ -110,9 +107,6 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <tr>
-                                                <td class="text-center">Data Kosong!</td>
-                                            </tr>
                                         @endforelse
                                     </tbody>
                                 </table>

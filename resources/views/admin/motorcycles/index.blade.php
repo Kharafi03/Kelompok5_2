@@ -22,6 +22,7 @@
                                             <th>No</th>
                                             <th>Gambar</th>
                                             <th>Nama</th>
+                                            <th>Plat Nomor</th>
                                             <th>Type Motor</th>
                                             <th>Harga sewa</th>                   
                                             <th>Status</th>
@@ -36,6 +37,7 @@
                                                     <img src="{{ asset('storage/' . $motorcycle->image1) }}" alt="image" class="img-fluid" width="100">
                                                 </td>
                                                 <td>{{ $motorcycle->nama_motor }}</td>
+                                                <td>{{ $motorcycle->plat_nomor }}</td>
                                                 <td>
                                                     <span class="badge bg-primary">
                                                         {{ $motorcycle->type->nama }}
@@ -49,9 +51,7 @@
                                                             class="btn btn-primary">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <form onclick="return confirm('Are you sure?')"
-                                                            action="{{ route('admin.motorcycles.destroy', $motorcycle) }}"
-                                                            method="POST">
+                                                        <form action="{{ route('admin.motorcycles.destroy', $motorcycle) }}" method="POST" class="delete-form">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-danger" type="submit"><i
@@ -61,9 +61,6 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <tr>
-                                                <td class="text-center">Data Kosong !</td>
-                                            </tr>
                                         @endforelse
                                 </table>
                             </div>
